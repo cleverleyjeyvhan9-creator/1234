@@ -243,8 +243,7 @@ public final class Stones {
         Box box = new Box(start, start.add(dir.multiply(15))).expand(1.5);
         for (LivingEntity e : w.getEntitiesByClass(LivingEntity.class, box, x -> x != p && x.isAlive())) {
             e.damage(w, w.getDamageSources().sonicBoom(p), 10.0F);
-            e.setVelocity(e.getVelocity().add(dir.x * 1.5, 0.4, dir.z * 1.5));
-            e.velocityModified = true;
+            e.addVelocity(dir.x * 1.5, 0.4, dir.z * 1.5);
         }
         w.playSound(null, p.getBlockPos(), SoundEvents.ENTITY_WARDEN_SONIC_BOOM, SoundCategory.PLAYERS, 3.0F, 1.0F);
     }
@@ -273,8 +272,7 @@ public final class Stones {
             return;
         }
         Vec3d v = away.normalize().multiply(-strength);
-        e.setVelocity(e.getVelocity().add(v.x, lift, v.z));
-        e.velocityModified = true;
+        e.addVelocity(v.x, lift, v.z);
     }
 
     private static LivingEntity target(ServerPlayerEntity p, double range) {
